@@ -3,6 +3,8 @@ import { useState, useCallback, useRef } from "react";
 export function useJobPoller() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
+  const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
 
   const startPolling = useCallback(async (jobId: string, apiUrl: string, originalFileName: string) => {
@@ -19,53 +21,43 @@ export function useJobPoller() {
         const job = JSON.parse(event.data);
 
         if (job.status === "COMPLETED") {
-          setStatusText("Done! Downloading...");
+          setStatusText("Done!");
           
-          // Trigger download
           const downloadUrl = `${apiUrl}${job.result_url}`;
-          const a = document.createElement("a");
-          a.href = downloadUrl;
-          a.download = `toolbox_${originalFileName}`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
+          setResultUrl(downloadUrl);
 
           setIsProcessing(false);
-          setStatusText("");
           ws.close();
           return;
         }
 
         if (job.status === "FAILED") {
+          setError(job.error || "Job failed");
           throw new Error(job.error || "Job failed");
         }
 
         setStatusText(`Processing (${job.status})...`);
       } catch (err: any) {
         console.error(err);
-        alert(err.message || "An error occurred processing WS message.");
+        setError(err.message || "An error occurred processing WS message.");
         setIsProcessing(false);
-        setStatusText("");
         ws.close();
       }
     };
 
     ws.onerror = (error) => {
       console.error("WebSocket error:", error);
-      alert("Lost connection to processing server.");
+      setError("Lost connection to processing server.");
       setIsProcessing(false);
-      setStatusText("");
     };
 
     ws.onclose = () => {
       if (isProcessing) {
-        // If it closed before completing, something went wrong
         setIsProcessing(false);
-        setStatusText("");
       }
     };
 
   }, [isProcessing]);
 
-  return { isProcessing, statusText, startPolling };
+  return { isProcessing, statusText, startPolling, resultUrl, error };
 }

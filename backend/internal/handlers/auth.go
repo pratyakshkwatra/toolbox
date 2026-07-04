@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -42,7 +43,7 @@ func (h *AuthHandler) HandleRegister(w http.ResponseWriter, r *http.Request) {
 		CreatedAt:    time.Now(),
 	}
 
-	if result := h.db.Create(&user); result.Error != nil {
+	if result := h.db.DB.Create(&user); result.Error != nil {
 		http.Error(w, "Email already exists", http.StatusConflict)
 		return
 	}
@@ -59,7 +60,7 @@ func (h *AuthHandler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user storage.User
-	if result := h.db.Where("email = ?", req.Email).First(&user); result.Error != nil {
+	if result := h.db.DB.Where("email = ?", req.Email).First(&user); result.Error != nil {
 		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 		return
 	}

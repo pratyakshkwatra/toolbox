@@ -3,13 +3,15 @@ package server
 import (
 	"encoding/json"
 	"net/http"
+	"sync"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"github.com/pratyakshkwatra/toolbox/backend/internal/config"
 	"github.com/pratyakshkwatra/toolbox/backend/internal/handlers"
-	"github.com/pratyakshkwatra/toolbox/backend/internal/processor"
+	"github.com/pratyakshkwatra/toolbox/backend/internal/kafka"
 	"github.com/pratyakshkwatra/toolbox/backend/internal/storage"
 )
 
@@ -27,6 +29,39 @@ func New(cfg *config.Config) http.Handler {
 		AllowCredentials: true,
 		MaxAge:           300,
 	}))
+
+	// Simple in-memory rate limiter (50 req/min)
+	var (
+		rateMu      sync.Mutex
+		rateLimiters = make(map[string]int)
+	)
+	
+	// Reset limits every minute
+	go func() {
+		for {
+			time.Sleep(time.Minute)
+			rateMu.Lock()
+			rateLimiters = make(map[string]int)
+			rateMu.Unlock()
+		}
+	}()
+
+	rateLimitMiddleware := func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			ip := r.RemoteAddr
+			rateMu.Lock()
+			rateLimiters[ip]++
+			count := rateLimiters[ip]
+			rateMu.Unlock()
+
+			if count > 50 {
+				http.Error(w, "Rate limit exceeded", http.StatusTooManyRequests)
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+	r.Use(rateLimitMiddleware)
 
 	// Setup dependencies
 	store := storage.NewLocalStorage("./tmp")

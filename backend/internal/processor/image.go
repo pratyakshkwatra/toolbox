@@ -1,13 +1,17 @@
 package processor
 
 import (
+	"bytes"
 	"errors"
+	"fmt"
 	"image"
 	"image/jpeg"
 	"image/png"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 type ImageProcessor struct{}

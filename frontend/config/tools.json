@@ -4,25 +4,114 @@
     "name": "Merge PDFs",
     "description": "Combine multiple PDF files into one document instantly.",
     "category": "pdf",
-    "icon": "\ud83d\udcc4",
+    "icon": "📄",
     "accept": "application/pdf",
-    "multiple": true
+    "multiple": true,
+    "execution": "local",
+    "popularityScore": 102
   },
   {
     "slug": "pdf-split",
     "name": "Split PDF",
     "description": "Extract individual pages from a PDF.",
     "category": "pdf",
-    "icon": "\ud83d\udcd1",
+    "icon": "📑",
     "accept": "application/pdf",
-    "multiple": false
+    "multiple": false,
+    "execution": "local",
+    "popularityScore": 19
+  },
+  {
+    "slug": "pdf-compress",
+    "name": "Compress PDF",
+    "description": "Reduce PDF file size while maintaining readability.",
+    "category": "pdf",
+    "icon": "🗜️",
+    "accept": "application/pdf",
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "quality",
+        "label": "Compression Level",
+        "type": "select",
+        "options": [
+          { "value": "low", "label": "Low Compression (High Quality)" },
+          { "value": "medium", "label": "Medium Compression (Balanced)" },
+          { "value": "high", "label": "High Compression (Small File)" }
+        ],
+        "default": "medium"
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 150
+  },
+  {
+    "slug": "pdf-protect",
+    "name": "Protect PDF",
+    "description": "Add a password to encrypt and secure your PDF.",
+    "category": "pdf",
+    "icon": "🔒",
+    "accept": "application/pdf",
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "password",
+        "label": "Password",
+        "type": "password",
+        "default": ""
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 88
+  },
+  {
+    "slug": "pdf-unlock",
+    "name": "Unlock PDF",
+    "description": "Remove password protection from a PDF.",
+    "category": "pdf",
+    "icon": "🔓",
+    "accept": "application/pdf",
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "password",
+        "label": "Current Password",
+        "type": "password",
+        "default": ""
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 65
+  },
+  {
+    "slug": "pdf-to-image",
+    "name": "PDF to Image",
+    "description": "Convert PDF pages into high-quality JPG or PNG images.",
+    "category": "pdf",
+    "icon": "🖼️",
+    "accept": "application/pdf",
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "format",
+        "label": "Image Format",
+        "type": "select",
+        "options": [
+          { "value": "jpg", "label": "JPG" },
+          { "value": "png", "label": "PNG" }
+        ],
+        "default": "jpg"
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 120
   },
   {
     "slug": "image-compress",
     "name": "Compress Image",
     "description": "Reduce file size locally without losing quality.",
     "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
+    "icon": "🖼️",
     "accept": "image/*",
     "multiple": false,
     "inputs": [
@@ -34,14 +123,16 @@
         "max": 100,
         "default": 80
       }
-    ]
+    ],
+    "execution": "local",
+    "popularityScore": 61
   },
   {
     "slug": "image-resize",
     "name": "Resize Image",
     "description": "Force images to precise pixel dimensions.",
     "category": "image",
-    "icon": "\ud83d\udcd0",
+    "icon": "📐",
     "accept": "image/*",
     "multiple": false,
     "inputs": [
@@ -57,14 +148,70 @@
         "type": "number",
         "default": "600"
       }
-    ]
+    ],
+    "execution": "local",
+    "popularityScore": 160
+  },
+  {
+    "slug": "image-convert",
+    "name": "Image Converter",
+    "description": "Convert images seamlessly between PNG, JPG, WEBP, and more.",
+    "category": "image",
+    "icon": "🔄",
+    "accept": "image/*",
+    "multiple": true,
+    "inputs": [
+      {
+        "name": "targetFormat",
+        "label": "Target Format",
+        "type": "select",
+        "options": [
+          { "value": "png", "label": "PNG" },
+          { "value": "jpg", "label": "JPG" },
+          { "value": "webp", "label": "WEBP" },
+          { "value": "bmp", "label": "BMP" },
+          { "value": "tiff", "label": "TIFF" },
+          { "value": "gif", "label": "GIF" }
+        ],
+        "default": "jpg"
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 300
+  },
+  {
+    "slug": "watermark",
+    "name": "Watermark",
+    "description": "Add a text watermark to your images.",
+    "category": "image",
+    "icon": "©️",
+    "accept": "image/*",
+    "multiple": true,
+    "inputs": [
+      {
+        "name": "text",
+        "label": "Watermark Text",
+        "type": "text",
+        "default": "Confidential"
+      },
+      {
+        "name": "opacity",
+        "label": "Opacity (%)",
+        "type": "range",
+        "min": 10,
+        "max": 100,
+        "default": 50
+      }
+    ],
+    "execution": "local",
+    "popularityScore": 45
   },
   {
     "slug": "video-trim",
     "name": "Trim Video",
     "description": "Cut video segments securely.",
     "category": "video",
-    "icon": "\u2702\ufe0f",
+    "icon": "✂️",
     "accept": "video/*",
     "multiple": false,
     "inputs": [
@@ -80,14 +227,16 @@
         "type": "text",
         "default": "00:00:10"
       }
-    ]
+    ],
+    "execution": "server",
+    "popularityScore": 7
   },
   {
     "slug": "video-rotate",
     "name": "Rotate Video",
     "description": "Rotate your video by 90, 180, or 270 degrees.",
     "category": "video",
-    "icon": "\ud83d\udd04",
+    "icon": "🔄",
     "accept": "video/*",
     "multiple": false,
     "inputs": [
@@ -96,669 +245,77 @@
         "label": "Rotation",
         "type": "select",
         "options": [
-          {
-            "value": "90",
-            "label": "90 Degrees"
-          },
-          {
-            "value": "180",
-            "label": "180 Degrees"
-          },
-          {
-            "value": "270",
-            "label": "270 Degrees"
-          }
+          { "value": "90", "label": "90 Degrees" },
+          { "value": "180", "label": "180 Degrees" },
+          { "value": "270", "label": "270 Degrees" }
         ],
         "default": "90"
       }
-    ]
+    ],
+    "execution": "server",
+    "popularityScore": 43
   },
   {
     "slug": "video-to-audio",
     "name": "Extract Audio",
     "description": "Pull the MP3 audio track out of any video.",
     "category": "video",
-    "icon": "\ud83c\udfb5",
+    "icon": "🎵",
     "accept": "video/*",
-    "multiple": false
+    "multiple": false,
+    "execution": "server",
+    "popularityScore": 30
+  },
+  {
+    "slug": "video-convert",
+    "name": "Video Converter",
+    "description": "Convert videos between MP4, WEBM, MKV, MOV, and AVI.",
+    "category": "video",
+    "icon": "🎥",
+    "accept": "video/*",
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "targetFormat",
+        "label": "Target Format",
+        "type": "select",
+        "options": [
+          { "value": "mp4", "label": "MP4" },
+          { "value": "webm", "label": "WEBM" },
+          { "value": "mkv", "label": "MKV" },
+          { "value": "mov", "label": "MOV" },
+          { "value": "avi", "label": "AVI" }
+        ],
+        "default": "mp4"
+      }
+    ],
+    "execution": "server",
+    "popularityScore": 210
   },
   {
     "slug": "audio-convert",
-    "name": "Audio Convert",
-    "description": "Convert any audio file format to MP3.",
+    "name": "Audio Converter",
+    "description": "Convert any audio file format to MP3, WAV, AAC, OGG, or FLAC.",
     "category": "audio",
-    "icon": "\ud83c\udfa7",
+    "icon": "🎧",
     "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "png-to-jpg",
-    "name": "PNG to JPG",
-    "description": "Convert PNG image to JPG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/png",
-    "multiple": false
-  },
-  {
-    "slug": "png-to-webp",
-    "name": "PNG to WEBP",
-    "description": "Convert PNG image to WEBP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/png",
-    "multiple": false
-  },
-  {
-    "slug": "png-to-bmp",
-    "name": "PNG to BMP",
-    "description": "Convert PNG image to BMP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/png",
-    "multiple": false
-  },
-  {
-    "slug": "png-to-tiff",
-    "name": "PNG to TIFF",
-    "description": "Convert PNG image to TIFF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/png",
-    "multiple": false
-  },
-  {
-    "slug": "png-to-gif",
-    "name": "PNG to GIF",
-    "description": "Convert PNG image to GIF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/png",
-    "multiple": false
-  },
-  {
-    "slug": "jpg-to-png",
-    "name": "JPG to PNG",
-    "description": "Convert JPG image to PNG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/jpg",
-    "multiple": false
-  },
-  {
-    "slug": "jpg-to-webp",
-    "name": "JPG to WEBP",
-    "description": "Convert JPG image to WEBP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/jpg",
-    "multiple": false
-  },
-  {
-    "slug": "jpg-to-bmp",
-    "name": "JPG to BMP",
-    "description": "Convert JPG image to BMP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/jpg",
-    "multiple": false
-  },
-  {
-    "slug": "jpg-to-tiff",
-    "name": "JPG to TIFF",
-    "description": "Convert JPG image to TIFF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/jpg",
-    "multiple": false
-  },
-  {
-    "slug": "jpg-to-gif",
-    "name": "JPG to GIF",
-    "description": "Convert JPG image to GIF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/jpg",
-    "multiple": false
-  },
-  {
-    "slug": "webp-to-png",
-    "name": "WEBP to PNG",
-    "description": "Convert WEBP image to PNG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/webp",
-    "multiple": false
-  },
-  {
-    "slug": "webp-to-jpg",
-    "name": "WEBP to JPG",
-    "description": "Convert WEBP image to JPG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/webp",
-    "multiple": false
-  },
-  {
-    "slug": "webp-to-bmp",
-    "name": "WEBP to BMP",
-    "description": "Convert WEBP image to BMP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/webp",
-    "multiple": false
-  },
-  {
-    "slug": "webp-to-tiff",
-    "name": "WEBP to TIFF",
-    "description": "Convert WEBP image to TIFF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/webp",
-    "multiple": false
-  },
-  {
-    "slug": "webp-to-gif",
-    "name": "WEBP to GIF",
-    "description": "Convert WEBP image to GIF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/webp",
-    "multiple": false
-  },
-  {
-    "slug": "bmp-to-png",
-    "name": "BMP to PNG",
-    "description": "Convert BMP image to PNG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/bmp",
-    "multiple": false
-  },
-  {
-    "slug": "bmp-to-jpg",
-    "name": "BMP to JPG",
-    "description": "Convert BMP image to JPG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/bmp",
-    "multiple": false
-  },
-  {
-    "slug": "bmp-to-webp",
-    "name": "BMP to WEBP",
-    "description": "Convert BMP image to WEBP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/bmp",
-    "multiple": false
-  },
-  {
-    "slug": "bmp-to-tiff",
-    "name": "BMP to TIFF",
-    "description": "Convert BMP image to TIFF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/bmp",
-    "multiple": false
-  },
-  {
-    "slug": "bmp-to-gif",
-    "name": "BMP to GIF",
-    "description": "Convert BMP image to GIF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/bmp",
-    "multiple": false
-  },
-  {
-    "slug": "tiff-to-png",
-    "name": "TIFF to PNG",
-    "description": "Convert TIFF image to PNG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/tiff",
-    "multiple": false
-  },
-  {
-    "slug": "tiff-to-jpg",
-    "name": "TIFF to JPG",
-    "description": "Convert TIFF image to JPG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/tiff",
-    "multiple": false
-  },
-  {
-    "slug": "tiff-to-webp",
-    "name": "TIFF to WEBP",
-    "description": "Convert TIFF image to WEBP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/tiff",
-    "multiple": false
-  },
-  {
-    "slug": "tiff-to-bmp",
-    "name": "TIFF to BMP",
-    "description": "Convert TIFF image to BMP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/tiff",
-    "multiple": false
-  },
-  {
-    "slug": "tiff-to-gif",
-    "name": "TIFF to GIF",
-    "description": "Convert TIFF image to GIF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/tiff",
-    "multiple": false
-  },
-  {
-    "slug": "gif-to-png",
-    "name": "GIF to PNG",
-    "description": "Convert GIF image to PNG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/gif",
-    "multiple": false
-  },
-  {
-    "slug": "gif-to-jpg",
-    "name": "GIF to JPG",
-    "description": "Convert GIF image to JPG format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/gif",
-    "multiple": false
-  },
-  {
-    "slug": "gif-to-webp",
-    "name": "GIF to WEBP",
-    "description": "Convert GIF image to WEBP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/gif",
-    "multiple": false
-  },
-  {
-    "slug": "gif-to-bmp",
-    "name": "GIF to BMP",
-    "description": "Convert GIF image to BMP format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/gif",
-    "multiple": false
-  },
-  {
-    "slug": "gif-to-tiff",
-    "name": "GIF to TIFF",
-    "description": "Convert GIF image to TIFF format instantly.",
-    "category": "image",
-    "icon": "\ud83d\uddbc\ufe0f",
-    "accept": "image/gif",
-    "multiple": false
-  },
-  {
-    "slug": "mp3-to-wav",
-    "name": "MP3 to WAV",
-    "description": "Convert MP3 audio to WAV format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp3-to-aac",
-    "name": "MP3 to AAC",
-    "description": "Convert MP3 audio to AAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp3-to-ogg",
-    "name": "MP3 to OGG",
-    "description": "Convert MP3 audio to OGG format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp3-to-flac",
-    "name": "MP3 to FLAC",
-    "description": "Convert MP3 audio to FLAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "wav-to-mp3",
-    "name": "WAV to MP3",
-    "description": "Convert WAV audio to MP3 format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "wav-to-aac",
-    "name": "WAV to AAC",
-    "description": "Convert WAV audio to AAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "wav-to-ogg",
-    "name": "WAV to OGG",
-    "description": "Convert WAV audio to OGG format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "wav-to-flac",
-    "name": "WAV to FLAC",
-    "description": "Convert WAV audio to FLAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "aac-to-mp3",
-    "name": "AAC to MP3",
-    "description": "Convert AAC audio to MP3 format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "aac-to-wav",
-    "name": "AAC to WAV",
-    "description": "Convert AAC audio to WAV format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "aac-to-ogg",
-    "name": "AAC to OGG",
-    "description": "Convert AAC audio to OGG format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "aac-to-flac",
-    "name": "AAC to FLAC",
-    "description": "Convert AAC audio to FLAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "ogg-to-mp3",
-    "name": "OGG to MP3",
-    "description": "Convert OGG audio to MP3 format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "ogg-to-wav",
-    "name": "OGG to WAV",
-    "description": "Convert OGG audio to WAV format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "ogg-to-aac",
-    "name": "OGG to AAC",
-    "description": "Convert OGG audio to AAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "ogg-to-flac",
-    "name": "OGG to FLAC",
-    "description": "Convert OGG audio to FLAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "flac-to-mp3",
-    "name": "FLAC to MP3",
-    "description": "Convert FLAC audio to MP3 format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "flac-to-wav",
-    "name": "FLAC to WAV",
-    "description": "Convert FLAC audio to WAV format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "flac-to-aac",
-    "name": "FLAC to AAC",
-    "description": "Convert FLAC audio to AAC format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "flac-to-ogg",
-    "name": "FLAC to OGG",
-    "description": "Convert FLAC audio to OGG format.",
-    "category": "audio",
-    "icon": "\ud83c\udfa7",
-    "accept": "audio/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp4-to-webm",
-    "name": "MP4 to WEBM",
-    "description": "Convert MP4 video to WEBM format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp4-to-mkv",
-    "name": "MP4 to MKV",
-    "description": "Convert MP4 video to MKV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp4-to-mov",
-    "name": "MP4 to MOV",
-    "description": "Convert MP4 video to MOV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mp4-to-avi",
-    "name": "MP4 to AVI",
-    "description": "Convert MP4 video to AVI format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "webm-to-mp4",
-    "name": "WEBM to MP4",
-    "description": "Convert WEBM video to MP4 format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "webm-to-mkv",
-    "name": "WEBM to MKV",
-    "description": "Convert WEBM video to MKV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "webm-to-mov",
-    "name": "WEBM to MOV",
-    "description": "Convert WEBM video to MOV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "webm-to-avi",
-    "name": "WEBM to AVI",
-    "description": "Convert WEBM video to AVI format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mkv-to-mp4",
-    "name": "MKV to MP4",
-    "description": "Convert MKV video to MP4 format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mkv-to-webm",
-    "name": "MKV to WEBM",
-    "description": "Convert MKV video to WEBM format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mkv-to-mov",
-    "name": "MKV to MOV",
-    "description": "Convert MKV video to MOV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mkv-to-avi",
-    "name": "MKV to AVI",
-    "description": "Convert MKV video to AVI format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mov-to-mp4",
-    "name": "MOV to MP4",
-    "description": "Convert MOV video to MP4 format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mov-to-webm",
-    "name": "MOV to WEBM",
-    "description": "Convert MOV video to WEBM format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mov-to-mkv",
-    "name": "MOV to MKV",
-    "description": "Convert MOV video to MKV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "mov-to-avi",
-    "name": "MOV to AVI",
-    "description": "Convert MOV video to AVI format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "avi-to-mp4",
-    "name": "AVI to MP4",
-    "description": "Convert AVI video to MP4 format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "avi-to-webm",
-    "name": "AVI to WEBM",
-    "description": "Convert AVI video to WEBM format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "avi-to-mkv",
-    "name": "AVI to MKV",
-    "description": "Convert AVI video to MKV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
-  },
-  {
-    "slug": "avi-to-mov",
-    "name": "AVI to MOV",
-    "description": "Convert AVI video to MOV format.",
-    "category": "video",
-    "icon": "\ud83c\udfa5",
-    "accept": "video/*",
-    "multiple": false
+    "multiple": false,
+    "inputs": [
+      {
+        "name": "targetFormat",
+        "label": "Target Format",
+        "type": "select",
+        "options": [
+          { "value": "mp3", "label": "MP3" },
+          { "value": "wav", "label": "WAV" },
+          { "value": "aac", "label": "AAC" },
+          { "value": "ogg", "label": "OGG" },
+          { "value": "flac", "label": "FLAC" }
+        ],
+        "default": "mp3"
+      }
+    ],
+    "execution": "server",
+    "popularityScore": 180
   }
 ]
