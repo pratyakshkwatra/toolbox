@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-background antialiased;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-[#161616]/70 backdrop-blur-md border border-white/10 shadow-lg rounded-md;
+  }
+  
+  .glass-modal {
+    @apply bg-[#1c1c1c]/80 backdrop-blur-xl border border-white/10 rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.4)];
+  }
+
+  .btn-primary {
+    @apply bg-primary-container text-white px-4 py-2 rounded font-medium border-t border-white/20 hover:brightness-110 transition-all;
+  }
+  
+  .btn-secondary {
+    @apply bg-transparent text-white border border-white/10 px-4 py-2 rounded font-medium hover:bg-white/5 transition-all;
+  }
+}
