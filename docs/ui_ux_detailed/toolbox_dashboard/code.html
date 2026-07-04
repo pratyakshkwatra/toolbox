@@ -1,0 +1,435 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Toolbox | Developer Utility Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(22, 22, 22, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 182, 139, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+        }
+        .primary-glow {
+            box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.2), 0 0 15px rgba(255, 122, 0, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ffb68b;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#93000a",
+                      "tertiary": "#95ccff",
+                      "on-secondary-container": "#b4b5b5",
+                      "tertiary-fixed-dim": "#95ccff",
+                      "on-primary-container": "#5c2800",
+                      "secondary-fixed": "#e2e2e2",
+                      "on-secondary": "#2f3131",
+                      "surface": "#131313",
+                      "secondary": "#c6c6c7",
+                      "primary": "#ffb68b",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-dim": "#131313",
+                      "primary-fixed": "#ffdbc8",
+                      "surface-bright": "#393939",
+                      "on-surface-variant": "#e0c0af",
+                      "surface-variant": "#353534",
+                      "on-background": "#e5e2e1",
+                      "tertiary-container": "#00a8ff",
+                      "inverse-primary": "#994700",
+                      "on-primary-fixed": "#321200",
+                      "surface-container": "#201f1f",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "surface-tint": "#ffb68b",
+                      "tertiary-fixed": "#cde5ff",
+                      "on-tertiary-container": "#003a5c",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "on-error-container": "#ffdad6",
+                      "on-surface": "#e5e2e1",
+                      "outline-variant": "#584235",
+                      "on-tertiary": "#003352",
+                      "secondary-container": "#454747",
+                      "primary-container": "#ff7a00",
+                      "on-error": "#690005",
+                      "on-secondary-fixed-variant": "#454747",
+                      "background": "#131313",
+                      "primary-fixed-dim": "#ffb68b",
+                      "on-primary": "#522300",
+                      "outline": "#a78b7c",
+                      "surface-container-highest": "#353534",
+                      "surface-container-high": "#2a2a2a",
+                      "on-primary-fixed-variant": "#753400",
+                      "surface-container-lowest": "#0e0e0e",
+                      "inverse-surface": "#e5e2e1",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "inverse-on-surface": "#313030",
+                      "on-tertiary-fixed": "#001d32"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "16px",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "stack-xl": "64px",
+                      "margin-desktop": "48px",
+                      "container-max": "1200px",
+                      "stack-xs": "4px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "display": ["Geist"],
+                      "body-sm": ["Geist"],
+                      "caption": ["Geist"],
+                      "label-md": ["JetBrains Mono"],
+                      "headline-lg": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container border-r border-white/5 shadow-xl flex flex-col py-stack-md z-40 hidden md:flex">
+<div class="px-6 mb-stack-xl flex items-center gap-3">
+<img alt="Toolbox Logo" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida/AP1WRLtlqnPZMalAE-ECPoo0B-yJVBZpU_yC_eAVmZghuBI4IhmbCsyD-YV1GYbbspCtNzHBGGWeWK19O-NjX7oQfDkAD0GpbXcFSq8BaWT8TFacRut6Y5Z4cqrJ1XRGvJrlAo5lc_ei6R4EYcCLJuGfnfLJlTpgUUY2GxI4hY-szPl3mB-HBjImYqict9-0tE9MRTWZGJUdNALXLDE-T5DbhNXZQsmGh7OS-XaOhMotYoTCR5Nb5SnF8paDWCGx">
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">toolbox</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-60">toolbox.pratyakshkwatra.com</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+<span class="font-label-md text-label-md">PDF Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined">image</span>
+<span class="font-label-md text-label-md">Image Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined">movie</span>
+<span class="font-label-md text-label-md">Video Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined">audio_file</span>
+<span class="font-label-md text-label-md">Audio Tools</span>
+</div>
+<div class="pt-stack-md px-4 pb-2">
+<span class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold opacity-40">Collection</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</div>
+</nav>
+<div class="px-4 mt-auto pt-stack-md">
+<button class="w-full bg-primary-container text-on-primary-fixed font-bold py-3 rounded-lg flex items-center justify-center gap-2 primary-glow active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+                Upgrade to Pro
+            </button>
+<div class="mt-4 space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-2 cursor-pointer transition-all rounded-lg">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-2 cursor-pointer transition-all rounded-lg">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-md text-label-md">Documentation</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Viewport -->
+<main class="md:ml-64 min-h-screen relative">
+<!-- Top Bar -->
+<header class="fixed top-0 right-0 left-0 md:left-64 h-16 bg-surface/70 backdrop-blur-xl border-b border-white/10 z-30 px-margin-desktop flex justify-between items-center shadow-sm">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/50">search</span>
+<input class="w-full bg-surface-container-lowest border border-white/5 rounded-full py-2 pl-10 pr-4 text-body-sm font-body-sm focus:outline-none focus:border-primary/50 transition-colors" placeholder="Search for tools, docs, or files..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-stack-md ml-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<img alt="GitHub" class="w-5 h-5 invert opacity-70 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF6a9Tmj32JSXVqgjVrIEHw0xnfs5dibU4YRqXx0dnA1LDMRzqv8cmmP2Zs4Vaey3Qwcr9jzsJwZWGVntkIQFvdU8ho-9xisRcu7YZjayH-ldJ9-4fdk06WJgtbYT6_JtwPHKZXb7TAWgO0tqC58R3nuRfBcMRcRY2E5dk2x2yot5BXey0axMTV9NZEPP76ypyZpaJfopop81afDgTL5jw0rZVTnqcEsdySxGIsjF7NEVfOt3LgaUqqlvITT53ES-Jhe3kIv0-Kjsd">
+</button>
+
+
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 pb-12 px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero / Recently Used -->
+<section class="mb-stack-xl">
+<div class="flex justify-between items-end mb-stack-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Recently Used</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant opacity-60">Pick up right where you left off</p>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+                        View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex gap-stack-md overflow-x-auto pb-4 custom-scrollbar">
+<!-- Recent Card 1 -->
+<div class="min-w-[280px] glass-card p-stack-md rounded-xl flex items-center gap-4 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center text-red-400">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold">PDF to Word</h3>
+<p class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">2 hours ago</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant/30 text-[18px]">chevron_right</span>
+</div>
+<!-- Recent Card 2 -->
+<div class="min-w-[280px] glass-card p-stack-md rounded-xl flex items-center gap-4 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold">Image Resizer</h3>
+<p class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">Yesterday</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant/30 text-[18px]">chevron_right</span>
+</div>
+<!-- Recent Card 3 -->
+<div class="min-w-[280px] glass-card p-stack-md rounded-xl flex items-center gap-4 cursor-pointer">
+<div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-400">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md font-bold">JSON Formatter</h3>
+<p class="text-[10px] text-on-surface-variant opacity-50 uppercase tracking-tighter">3 days ago</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant/30 text-[18px]">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Main Tools Grid -->
+<section>
+<div class="flex items-center gap-stack-md mb-stack-lg border-b border-white/5 pb-4">
+<button class="font-label-md text-label-md text-primary border-b-2 border-primary pb-4 -mb-[18px]">All Tools</button>
+<button class="font-label-md text-label-md text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity pb-4 -mb-[18px]">PDF</button>
+<button class="font-label-md text-label-md text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity pb-4 -mb-[18px]">Image</button>
+<button class="font-label-md text-label-md text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity pb-4 -mb-[18px]">Video</button>
+<button class="font-label-md text-label-md text-on-surface-variant opacity-60 hover:opacity-100 transition-opacity pb-4 -mb-[18px]">Audio</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<!-- Tool Card 1 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">compress</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-container/20 text-tertiary uppercase tracking-wider">Popular</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Compress PDF</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Reduce the file size of your PDF documents while keeping optimal quality for sharing.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.PDF</span>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+</div>
+<!-- Tool Card 2 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">transform</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-container/20 text-primary-fixed uppercase tracking-wider">New</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">SVG Optimizer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Clean up SVG files to reduce footprint. Removes metadata, hidden elements, and simplifies paths.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.SVG</span>
+<button class="text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+</div>
+<!-- Tool Card 3 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lock_reset</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Remove PDF Password</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Unlock password-protected PDF files instantly. Security is prioritized with local processing.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.PDF</span>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+</div>
+<!-- Tool Card 4 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">video_library</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-container/20 text-tertiary uppercase tracking-wider">Popular</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Video to GIF</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Convert short video clips into high-quality GIFs. Adjust framerate and resolution with ease.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.MP4, .MOV</span>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+</div>
+<!-- Tool Card 5 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">JSON to CSV</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Efficiently convert complex nested JSON objects into flattened CSV files for spreadsheet use.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.JSON</span>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+</div>
+<!-- Tool Card 6 -->
+<div class="glass-card p-6 rounded-xl relative group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">equalizer</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface group-hover:text-primary transition-colors">Audio Normalizer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mb-6">Fix volume levels across multiple audio tracks. Supports peak and RMS normalization modes.</p>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-[11px] text-on-surface-variant/40 font-medium">.MP3, .WAV</span>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Floating Activity Indicator (Atmospheric) -->
+<div class="fixed bottom-8 right-8 z-50">
+<div class="glass-card px-4 py-2 rounded-full flex items-center gap-3 shadow-2xl">
+<div class="relative w-2 h-2">
+<div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-75"></div>
+<div class="relative bg-primary w-2 h-2 rounded-full"></div>
+</div>
+<span class="font-label-md text-[10px] text-on-surface-variant font-bold uppercase tracking-widest">Network Secure</span>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="md:ml-64 bg-surface-container-lowest py-stack-lg border-t border-white/5 relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-stack-md">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md font-bold text-on-surface">Toolbox</span>
+<span class="text-on-secondary-container font-caption text-caption">© 2024 Toolbox Utility. Built for performance.</span>
+</div>
+<div class="flex gap-stack-md">
+<a class="text-on-surface font-caption text-caption hover:text-primary transition-colors underline flex items-center gap-1" href="#"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF6a9Tmj32JSXVqgjVrIEHw0xnfs5dibU4YRqXx0dnA1LDMRzqv8cmmP2Zs4Vaey3Qwcr9jzsJwZWGVntkIQFvdU8ho-9xisRcu7YZjayH-ldJ9-4fdk06WJgtbYT6_JtwPHKZXb7TAWgO0tqC58R3nuRfBcMRcRY2E5dk2x2yot5BXey0axMTV9NZEPP76ypyZpaJfopop81afDgTL5jw0rZVTnqcEsdySxGIsjF7NEVfOt3LgaUqqlvITT53ES-Jhe3kIv0-Kjsd" class="w-3 h-3 invert" alt="GitHub">GitHub</a>
+<a class="text-on-secondary-container font-caption text-caption hover:text-primary transition-colors underline" href="#">Documentation</a>
+<a class="text-on-secondary-container font-caption text-caption hover:text-primary transition-colors underline" href="#">Privacy</a>
+<a class="text-on-secondary-container font-caption text-caption hover:text-primary transition-colors underline" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple search interaction
+        document.querySelector('input').addEventListener('focus', function() {
+            this.parentElement.classList.add('ring-1', 'ring-primary/50');
+        });
+        document.querySelector('input').addEventListener('blur', function() {
+            this.parentElement.classList.remove('ring-1', 'ring-primary/50');
+        });
+
+        // Toggle card favorite state demo
+        document.querySelectorAll('.glass-card button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (icon && icon.innerText === 'star') {
+                    const isFilled = icon.style.fontVariationSettings.includes('FILL\' 1');
+                    icon.style.fontVariationSettings = isFilled ? "'FILL' 0" : "'FILL' 1";
+                    if (!isFilled) {
+                        this.classList.add('text-primary');
+                        this.classList.remove('text-on-surface');
+                    } else {
+                        this.classList.remove('text-primary');
+                        this.classList.add('text-on-surface');
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

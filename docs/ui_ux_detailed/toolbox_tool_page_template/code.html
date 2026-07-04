@@ -1,0 +1,402 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Compress PDF | Toolbox</title>
+<!-- Material Symbols for Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Geist & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#93000a",
+            "tertiary": "#95ccff",
+            "on-secondary-container": "#b4b5b5",
+            "tertiary-fixed-dim": "#95ccff",
+            "on-primary-container": "#5c2800",
+            "secondary-fixed": "#e2e2e2",
+            "on-secondary": "#2f3131",
+            "surface": "#131313",
+            "secondary": "#c6c6c7",
+            "primary": "#ffb68b",
+            "surface-container-low": "#1c1b1b",
+            "surface-dim": "#131313",
+            "primary-fixed": "#ffdbc8",
+            "surface-bright": "#393939",
+            "on-surface-variant": "#e0c0af",
+            "surface-variant": "#353534",
+            "on-background": "#e5e2e1",
+            "tertiary-container": "#00a8ff",
+            "inverse-primary": "#994700",
+            "on-primary-fixed": "#321200",
+            "surface-container": "#201f1f",
+            "on-secondary-fixed": "#1a1c1c",
+            "surface-tint": "#ffb68b",
+            "tertiary-fixed": "#cde5ff",
+            "on-tertiary-container": "#003a5c",
+            "secondary-fixed-dim": "#c6c6c7",
+            "on-error-container": "#ffdad6",
+            "on-surface": "#e5e2e1",
+            "outline-variant": "#584235",
+            "on-tertiary": "#003352",
+            "secondary-container": "#454747",
+            "primary-container": "#ff7a00",
+            "on-error": "#690005",
+            "on-secondary-fixed-variant": "#454747",
+            "background": "#131313",
+            "primary-fixed-dim": "#ffb68b",
+            "on-primary": "#522300",
+            "outline": "#a78b7c",
+            "surface-container-highest": "#353534",
+            "surface-container-high": "#2a2a2a",
+            "on-primary-fixed-variant": "#753400",
+            "surface-container-lowest": "#0e0e0e",
+            "inverse-surface": "#e5e2e1",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed-variant": "#004a75",
+            "inverse-on-surface": "#313030",
+            "on-tertiary-fixed": "#001d32"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "stack-xl": "64px",
+            "margin-desktop": "48px",
+            "container-max": "1200px",
+            "stack-xs": "4px",
+            "margin-mobile": "16px",
+            "unit": "4px",
+            "gutter": "24px",
+            "stack-lg": "32px"
+          },
+          "fontFamily": {
+            "display": ["Geist", "sans-serif"],
+            "body-lg": ["Geist", "sans-serif"],
+            "headline-md": ["Geist", "sans-serif"],
+            "headline-lg": ["Geist", "sans-serif"],
+            "label-md": ["JetBrains Mono", "monospace"],
+            "caption": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+            "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+            "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .glass-card {
+      background: rgba(22, 22, 22, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .inner-glow {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .upload-area-drag {
+      border-color: #ffb68b !important;
+      background: rgba(255, 182, 139, 0.05);
+      box-shadow: 0 0 20px rgba(255, 182, 139, 0.1);
+    }
+    body {
+      background-color: #0A0A0A;
+      color: #e5e2e1;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #131313;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #353534;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="font-body-lg text-body-lg overflow-x-hidden selection:bg-primary/30">
+<!-- TopNavBar Implementation -->
+<header class="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl border-b border-white/10 shadow-sm">
+<div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-stack-md">
+<img alt="Toolbox Logo" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida/AP1WRLtlqnPZMalAE-ECPoo0B-yJVBZpU_yC_eAVmZghuBI4IhmbCsyD-YV1GYbbspCtNzHBGGWeWK19O-NjX7oQfDkAD0GpbXcFSq8BaWT8TFacRut6Y5Z4cqrJ1XRGvJrlAo5lc_ei6R4EYcCLJuGfnfLJlTpgUUY2GxI4hY-szPl3mB-HBjImYqict9-0tE9MRTWZGJUdNALXLDE-T5DbhNXZQsmGh7OS-XaOhMotYoTCR5Nb5SnF8paDWCGx">
+<span class="font-display text-headline-md text-primary tracking-tighter">toolbox</span>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg"><a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Tools</a></nav>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="bg-primary text-on-primary font-bold px-stack-md py-2 rounded-lg inner-glow active:scale-95 transition-transform">
+          Sign In
+        </button>
+</div>
+</div>
+</header>
+<!-- SideNavBar implementation (Desktop only as secondary nav) -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 pt-16 flex-col py-stack-md bg-surface-container border-r border-white/5 shadow-xl z-40">
+<div class="px-6 py-8">
+<h2 class="font-headline-md font-bold text-primary">toolbox Pro</h2>
+
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer active:bg-white/20 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-4 py-3 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+<span class="font-label-md text-label-md">PDF Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer active:bg-white/20 transition-all">
+<span class="material-symbols-outlined">image</span>
+<span class="font-label-md text-label-md">Image Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer active:bg-white/20 transition-all">
+<span class="material-symbols-outlined">movie</span>
+<span class="font-label-md text-label-md">Video Tools</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer active:bg-white/20 transition-all">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-md text-label-md">Favorites</span>
+</div>
+</nav>
+<div class="p-4">
+<div class="bg-white/5 border border-white/10 p-4 rounded-xl">
+<p class="font-bold text-sm mb-1">Upgrade to Pro</p>
+<p class="text-[12px] text-on-surface-variant/80 mb-3 leading-snug">Get unlimited batch processing and larger file limits.</p>
+<button class="w-full bg-primary/10 hover:bg-primary/20 text-primary text-[12px] font-bold py-1.5 rounded transition-colors">
+          Learn More
+        </button>
+</div>
+</div>
+<footer class="mt-auto border-t border-white/5">
+<div class="flex items-center gap-3 text-on-surface-variant hover:bg-white/5 px-4 py-3 cursor-pointer transition-all">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</div>
+</footer>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:pl-64 pt-24 pb-stack-xl px-margin-mobile md:px-margin-desktop">
+<div class="max-w-4xl mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-stack-lg text-on-surface-variant">
+<span class="font-label-md text-label-md opacity-60 hover:opacity-100 cursor-pointer transition-opacity">dashboard</span>
+<span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+<span class="font-label-md text-label-md opacity-60 hover:opacity-100 cursor-pointer transition-opacity">pdf</span>
+<span class="material-symbols-outlined text-sm opacity-40">chevron_right</span>
+<span class="font-label-md text-label-md text-primary">compress pdf</span>
+</nav>
+<!-- Header Section -->
+<section class="mb-stack-xl">
+<h1 class="font-display text-headline-lg mb-2">Compress PDF</h1>
+<p class="text-on-surface-variant max-w-2xl">
+          Reduce the file size of your PDF documents while maintaining the best possible quality. Optimize for web, email, or print in seconds.
+        </p>
+</section>
+<!-- Tool Interface -->
+<div class="space-y-stack-lg">
+<!-- Upload Area -->
+<div class="glass-card rounded-xl p-stack-xl flex flex-col items-center justify-center text-center border-2 border-dashed border-white/20 transition-all cursor-pointer group" id="drop-zone">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-stack-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<h3 class="font-headline-md mb-2">Click or drag files to upload</h3>
+<p class="text-on-surface-variant mb-stack-lg">Support for batch upload. Total limit 500MB.</p>
+<div class="flex flex-wrap justify-center gap-2">
+<span class="font-label-md text-label-md px-3 py-1 bg-white/5 border border-white/10 rounded-full">.PDF</span>
+<span class="font-label-md text-label-md px-3 py-1 bg-white/5 border border-white/10 rounded-full">BATCH MODE</span>
+</div>
+<input accept=".pdf" class="hidden" id="file-input" multiple="" type="file">
+</div>
+<!-- Processing Options -->
+<div class="glass-card rounded-xl p-stack-md">
+<div class="flex items-center gap-2 mb-stack-md">
+<span class="material-symbols-outlined text-primary">tune</span>
+<span class="font-headline-md text-sm uppercase tracking-widest text-on-surface-variant">Compression Settings</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<!-- Option 1 -->
+<label class="relative cursor-pointer group">
+<input checked="" class="peer hidden" name="compression" type="radio">
+<div class="p-4 rounded-lg border border-white/5 bg-white/5 group-hover:bg-white/10 transition-colors peer-checked:border-primary peer-checked:bg-primary/5">
+<p class="font-bold mb-1">Medium</p>
+<p class="text-caption text-on-surface-variant">Recommended quality and file size.</p>
+</div>
+</label>
+<!-- Option 2 -->
+<label class="relative cursor-pointer group">
+<input class="peer hidden" name="compression" type="radio">
+<div class="p-4 rounded-lg border border-white/5 bg-white/5 group-hover:bg-white/10 transition-colors peer-checked:border-primary peer-checked:bg-primary/5">
+<p class="font-bold mb-1">High</p>
+<p class="text-caption text-on-surface-variant">Extreme compression, lower image quality.</p>
+</div>
+</label>
+<!-- Option 3 -->
+<label class="relative cursor-pointer group">
+<input class="peer hidden" name="compression" type="radio">
+<div class="p-4 rounded-lg border border-white/5 bg-white/5 group-hover:bg-white/10 transition-colors peer-checked:border-primary peer-checked:bg-primary/5">
+<p class="font-bold mb-1">Low</p>
+<p class="text-caption text-on-surface-variant">Best quality, less reduction in size.</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Progress Section (Hidden by default, shown via JS) -->
+<div class="hidden glass-card rounded-xl p-stack-md space-y-stack-md" id="processing-section">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary animate-spin">refresh</span>
+<span class="font-bold">Optimizing files...</span>
+</div>
+<span class="font-label-md text-primary" id="progress-text">45%</span>
+</div>
+<div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary shadow-[0_0_8px_rgba(255,182,139,0.5)] transition-all duration-300" id="progress-bar" style="width: 45%;"></div>
+</div>
+</div>
+<!-- Results Section (Hidden by default) -->
+<div class="hidden space-y-stack-md" id="results-section">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md">Ready to Download</h3>
+<button class="text-primary hover:underline font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">download</span>
+              Download All (.zip)
+            </button>
+</div>
+<div class="space-y-2">
+<!-- File Item 1 -->
+<div class="glass-card rounded-lg p-stack-md flex items-center justify-between border-l-4 border-l-primary">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+<div>
+<p class="font-bold text-sm">annual_report_2023.pdf</p>
+<p class="text-caption text-on-surface-variant">12.4 MB → <span class="text-primary">4.2 MB (-66%)</span></p>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-white/5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+<!-- File Item 2 -->
+<div class="glass-card rounded-lg p-stack-md flex items-center justify-between border-l-4 border-l-primary">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant">description</span>
+<div>
+<p class="font-bold text-sm">design_assets_final.pdf</p>
+<p class="text-caption text-on-surface-variant">45.0 MB → <span class="text-primary">12.1 MB (-73%)</span></p>
+</div>
+</div>
+<button class="p-2 rounded hover:bg-white/5 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Privacy Notice -->
+<div class="mt-stack-xl flex items-start gap-stack-md p-stack-md bg-white/5 rounded-xl border border-white/5">
+<span class="material-symbols-outlined text-on-surface-variant/60">security</span>
+<p class="text-caption text-on-surface-variant/80">
+          Your privacy is our priority. All processed documents are encrypted and files are automatically deleted from our servers after 1 hour of processing. We do not store or read your data.
+        </p>
+</div>
+</div>
+</main>
+<!-- Main Footer -->
+<footer class="lg:pl-64 w-full bg-surface-container-lowest border-t border-white/5 py-stack-lg">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-4">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-bold">toolbox</span>
+<span class="font-caption text-caption text-on-secondary-container">© 2024 Toolbox Utility. Built for performance.</span>
+</div>
+<div class="flex gap-stack-md">
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity" href="#">GitHub</a>
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity" href="#">Documentation</a>
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity" href="#">Privacy</a>
+<a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const processingSection = document.getElementById('processing-section');
+    const resultsSection = document.getElementById('results-section');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    // Drag and Drop Logic
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('upload-area-drag');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('upload-area-drag');
+      }, false);
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer.files;
+      if (files.length > 0) handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      // Simulate Processing
+      dropZone.classList.add('opacity-50', 'pointer-events-none');
+      processingSection.classList.remove('hidden');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 15) + 5;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            processingSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            dropZone.classList.remove('opacity-50', 'pointer-events-none');
+          }, 500);
+        }
+        progressBar.style.width = `${progress}%`;
+        progressText.innerText = `${progress}%`;
+      }, 300);
+    }
+  </script>
+
+
+</body></html>

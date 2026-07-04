@@ -1,0 +1,402 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Toolbox | Every file tool you'll ever need</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "tertiary": "#95ccff",
+                        "on-secondary-container": "#b4b5b5",
+                        "tertiary-fixed-dim": "#95ccff",
+                        "on-primary-container": "#5c2800",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-secondary": "#2f3131",
+                        "surface": "#131313",
+                        "secondary": "#c6c6c7",
+                        "primary": "#ffb68b",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#131313",
+                        "primary-fixed": "#ffdbc8",
+                        "surface-bright": "#393939",
+                        "on-surface-variant": "#e0c0af",
+                        "surface-variant": "#353534",
+                        "on-background": "#e5e2e1",
+                        "tertiary-container": "#00a8ff",
+                        "inverse-primary": "#994700",
+                        "on-primary-fixed": "#321200",
+                        "surface-container": "#201f1f",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-tint": "#ffb68b",
+                        "tertiary-fixed": "#cde5ff",
+                        "on-tertiary-container": "#003a5c",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#584235",
+                        "on-tertiary": "#003352",
+                        "secondary-container": "#454747",
+                        "primary-container": "#ff7a00",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#454747",
+                        "background": "#131313",
+                        "primary-fixed-dim": "#ffb68b",
+                        "on-primary": "#522300",
+                        "outline": "#a78b7c",
+                        "surface-container-highest": "#353534",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-fixed-variant": "#753400",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-surface": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed": "#001d32"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-xl": "64px",
+                        "margin-desktop": "48px",
+                        "container-max": "1200px",
+                        "stack-xs": "4px",
+                        "margin-mobile": "16px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "display": ["Geist"],
+                        "body-sm": ["Geist"],
+                        "caption": ["Geist"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #E5E2E1;
+            scroll-behavior: smooth;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(22, 22, 22, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 182, 139, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+        .nav-link-active {
+            color: #ffb68b;
+            font-weight: 700;
+            border-bottom: 2px solid #ffb68b;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-white/10 bg-surface/70 shadow-sm">
+<div class="flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<img alt="toolbox logo" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida/AP1WRLtlqnPZMalAE-ECPoo0B-yJVBZpU_yC_eAVmZghuBI4IhmbCsyD-YV1GYbbspCtNzHBGGWeWK19O-NjX7oQfDkAD0GpbXcFSq8BaWT8TFacRut6Y5Z4cqrJ1XRGvJrlAo5lc_ei6R4EYcCLJuGfnfLJlTpgUUY2GxI4hY-szPl3mB-HBjImYqict9-0tE9MRTWZGJUdNALXLDE-T5DbhNXZQsmGh7OS-XaOhMotYoTCR5Nb5SnF8paDWCGx">
+<span class="font-display text-headline-md text-primary tracking-tighter">toolbox</span>
+</div>
+<div class="hidden md:flex items-center gap-8"><div class="group relative"><a href="#" class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-body-lg text-body-lg flex items-center gap-1">Categories <span class="material-symbols-outlined text-sm">expand_more</span></a></div>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-lg text-body-lg" href="#">Tools</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-body-lg text-body-lg" href="#">Docs</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-body-lg text-body-lg" href="#">Changelog</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="bg-primary-container text-on-primary font-bold px-5 py-2 rounded shadow-sm hover:opacity-90 active:scale-95 transition-all inner-glow">
+                    Sign In
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto text-center mb-stack-xl relative transition-all duration-700 opacity-100 translate-y-0">
+<div class="absolute -z-10 top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTih3pu0yeJ7bku_Hskl3h65008QTTU3XjnEzTRbuxd4L0VizM_MtBk4uJaCmEa-oxjEnw8y_b_MuM7BvcKY8RBHP14LX_dQIDCJDhoqNxSl-IUh6sEfMXazxveaCt6_z_X3hPQY09dtl8TlajnfUY00g23oD0xPlrTTdiDTNAQ7OoKMph9yIrpV-uNHG7qaRjGO3YvVmEOz0NByxZMXcHtC-9E8yjOcYBeBX9tJ1EbXg9fKZDQyJUK-H3kmibBLCemIDZlVtOswaN" alt="Toolbox Hero Illustration" class="w-full h-full object-cover"></div>
+<h1 class="font-display text-display mb-stack-md text-on-surface max-w-4xl mx-auto leading-tight">Every file tool you'll ever need. <span class="text-primary">Free. Open. Private.</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-lg">
+                A premium suite of web utilities for documents, images, and media. No registration, no tracking, just speed.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center items-center gap-stack-md">
+<button class="w-full sm:w-auto bg-primary text-on-primary font-bold px-8 py-4 rounded-lg text-body-lg inner-glow active:scale-95 transition-all shadow-lg shadow-primary/20">
+                    Open Dashboard
+                </button>
+<button class="w-full sm:w-auto bg-transparent border border-white/10 text-on-surface hover:bg-white/5 font-bold px-8 py-4 rounded-lg text-body-lg active:scale-95 transition-all">
+                    View on GitHub
+                </button>
+</div>
+<!-- File Type Chips -->
+<div class="mt-stack-lg flex flex-wrap justify-center gap-stack-xs opacity-60">
+<span class="font-label-md text-label-md px-3 py-1 bg-surface-container rounded border border-white/5">.PDF</span>
+<span class="font-label-md text-label-md px-3 py-1 bg-surface-container rounded border border-white/5">.JPG</span>
+<span class="font-label-md text-label-md px-3 py-1 bg-surface-container rounded border border-white/5">.MP4</span>
+<span class="font-label-md text-label-md px-3 py-1 bg-surface-container rounded border border-white/5">.PNG</span>
+<span class="font-label-md text-label-md px-3 py-1 bg-surface-container rounded border border-white/5">.WEBP</span>
+</div>
+</section>
+<!-- Featured Categories -->
+<section class="px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="glass-card p-stack-lg rounded-xl text-left flex flex-col gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">picture_as_pdf</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">PDF Tools</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Merge, split, compress, and convert PDF documents with millisecond precision.</p>
+</div>
+<div class="glass-card p-stack-lg rounded-xl text-left flex flex-col gap-4">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-3xl">image</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Image Tools</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Bulk optimize, resize, and transform your visuals without losing a single pixel of quality.</p>
+</div>
+<div class="glass-card p-stack-lg rounded-xl text-left flex flex-col gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">movie</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Video &amp; Audio</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Transcode, trim, and adjust media files directly in your browser. No server uploads required.</p>
+</div>
+</section>
+<!-- Popular Tools Grid -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-stack-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="flex items-center justify-between mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Popular Tools</h2>
+<a class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline" href="#">
+                    View all 50+ tools
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Merge PDF</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Combine multiple files into one PDF.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+<!-- Card 2 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Compress PDF</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Reduce file size without losing quality.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+<!-- Card 3 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">JPG to PNG</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Convert images with transparency support.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+<!-- Card 4 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Resize Image</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Change dimensions for web and print.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+<!-- Card 5 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Trim Video</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Quickly cut sections from any video.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+<!-- Card 6 -->
+<div class="glass-card p-6 rounded-lg group flex items-start justify-between cursor-pointer">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface mb-2">Convert MP4</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">Fast transcoding to web-friendly formats.</p>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">call_made</span>
+</div>
+</div>
+</section>
+<!-- Privacy & Security Section -->
+<section class="bg-surface-container py-stack-xl mb-stack-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="px-margin-desktop max-w-container-max mx-auto text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 font-label-md text-label-md mb-stack-md">
+<span class="material-symbols-outlined text-sm">lock</span>
+                    PRIVACY BY DESIGN
+                </div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-lg max-w-2xl mx-auto">Your files stay private. Secured by local processing.</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mt-stack-lg">
+<div class="flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">shield</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Secure HTTPS processing</p>
+</div>
+<div class="flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">code</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Open-source transparency</p>
+</div>
+<div class="flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">timer_off</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automatic deletion after 1 hour</p>
+</div>
+<div class="flex flex-col items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_off</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No server-side storage</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-stack-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="glass-card p-stack-lg rounded-xl bg-primary/5 flex flex-col justify-end min-h-[300px]">
+<span class="material-symbols-outlined text-primary text-5xl mb-4">bolt</span>
+<h3 class="font-headline-lg text-headline-lg mb-2">Lightning Fast</h3>
+<p class="text-on-surface-variant">Engineered for performance with modern browser technologies. Processing happens at the speed of your hardware.</p>
+</div>
+<div class="grid grid-rows-2 gap-gutter">
+<div class="glass-card p-stack-md rounded-xl flex items-center gap-6">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-3xl">layers</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-1">Batch Processing</h4>
+<p class="text-on-surface-variant text-body-sm">Handle 100+ files at once with zero lag.</p>
+</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl flex items-center gap-6">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-3xl">salinity</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-1">No Daily Limits</h4>
+<p class="text-on-surface-variant text-body-sm">Use it as much as you want. Always free.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl mt-gutter flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="bg-surface-container-high p-4 rounded-lg">
+<span class="material-symbols-outlined text-secondary text-3xl">devices</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md mb-1">Cross Platform</h4>
+<p class="text-on-surface-variant text-body-sm">Optimized for Desktop, Tablet, and Mobile browsers.</p>
+</div>
+</div>
+<div class="hidden lg:flex items-center gap-4 opacity-40">
+<span class="material-symbols-outlined">window</span>
+<span class="material-symbols-outlined">apps</span>
+<span class="material-symbols-outlined">android</span>
+<span class="material-symbols-outlined">terminal</span>
+</div>
+</div>
+</section>
+<!-- Final CTA Area -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-stack-xl transition-all duration-700 opacity-100 translate-y-0">
+<div class="relative overflow-hidden rounded-3xl p-stack-xl bg-gradient-to-br from-primary-container/20 to-surface-container-highest border border-white/5 text-center">
+
+<h2 class="font-display text-headline-lg text-on-surface mb-stack-md">Ready to start optimizing?</h2>
+<p class="text-on-surface-variant font-body-lg max-w-xl mx-auto mb-stack-lg">Join thousands of developers and creators who use Toolbox for their daily file operations.</p>
+<button class="bg-primary text-on-primary font-bold px-12 py-5 rounded-full text-headline-md shadow-xl shadow-primary/30 active:scale-95 transition-all inner-glow">
+                    Get Started Now
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg border-t border-white/5 bg-surface-container-lowest">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-stack-md">
+<div class="flex flex-col items-center md:items-start gap-1">
+<div class="flex items-center gap-2 mb-2">
+<img alt="Logo" class="w-6 h-6 grayscale opacity-70" src="https://lh3.googleusercontent.com/aida/AP1WRLtlqnPZMalAE-ECPoo0B-yJVBZpU_yC_eAVmZghuBI4IhmbCsyD-YV1GYbbspCtNzHBGGWeWK19O-NjX7oQfDkAD0GpbXcFSq8BaWT8TFacRut6Y5Z4cqrJ1XRGvJrlAo5lc_ei6R4EYcCLJuGfnfLJlTpgUUY2GxI4hY-szPl3mB-HBjImYqict9-0tE9MRTWZGJUdNALXLDE-T5DbhNXZQsmGh7OS-XaOhMotYoTCR5Nb5SnF8paDWCGx">
+<span class="font-label-md text-label-md font-bold text-on-surface">toolbox.pratyakshkwatra.com</span>
+</div>
+
+</div>
+<div class="flex gap-8"><a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity hover:opacity-80 flex items-center gap-1" href="https://github.com"><span class="material-symbols-outlined text-sm">code</span> GitHub Repository</a><a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity hover:opacity-80" href="#">Privacy Policy</a><a class="font-caption text-caption text-on-secondary-container hover:text-primary underline transition-opacity hover:opacity-80" href="#">Terms of Service</a></div>
+<div class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant/40">
+<span class="material-symbols-outlined text-sm">circle</span>
+<span class="">SYSTEM STATUS: OPERATIONAL</span>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and subtle effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for canvas particle effects on hover
+            });
+        });
+
+        // Add a smooth appearance to elements as they scroll into view
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+    </script>
+
+
+</body></html>
